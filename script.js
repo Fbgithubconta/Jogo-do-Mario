@@ -7,55 +7,44 @@ let score = 0;
 let gameRunning = true;
 
 const jump = () => {
-    if (!mario.classList.contains('jump')) {
-        mario.classList.add('jump'); // Faz o pulo
-        setTimeout(() => {
-            mario.classList.remove('jump');
-        }, 500); // Remove o pulo após 500ms
-    }
+  if (!mario.classList.contains('jump')) {
+    mario.classList.add('jump');
+    setTimeout(() => {
+      mario.classList.remove('jump');
+    }, 500);
+  }
 };
 
-let lastFrameTime = 0;
+let pipeSpeed = 5;
 
-const loop = (timestamp) => {
-    if (!gameRunning) return;
+const gameLoop = () => {
+  if (!gameRunning) return;
 
-    const mario_position = +window.getComputedStyle(mario).bottom.replace('px', ''); // Pega a posição do Mario
-    const pipe_position = pipe.offsetLeft; // Pega a posição do cano
+  const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+  const pipePosition = pipe.offsetLeft;
 
-    // Colisão
-    if (pipe_position <= 120 && pipe_position > 0 && mario_position < 80) {
-        pipe.style.animation = 'none'; // Para a animação quando colidir
-        pipe.style.left = `${pipe_position}px`; // Mantém o cano na posição de colisão
-        mario.src = 'img/game-over.png';
-        mario.style.width = '75px';
-        mario.style.marginLeft = '50px';
-        reset.style.display = 'flex';
-        gameRunning = false;
-        clearInterval(scoreInterval); // Para a pontuação quando o jogo acaba
-        return;
-    }
+  // Atualiza posição do pipe manualmente
+  pipe.style.left = ${pipePosition - pipeSpeed}px;
 
-    // Resetar a posição do cano
-    if (pipe_position <= 0) {
-        pipe.style.left = '100%'; // Reseta a posição do cano
-    }
+  if (pipePosition <= 0) {
+    pipe.style.left = '100%';
+    score++; // Atualiza pontuação ao passar o cano
+    scoreDisplay.innerText = Pontuação: ${score};
+  }
 
-    // Solicita o próximo quadro (ciclo de animação)
-    requestAnimationFrame(loop);
+  if (pipePosition <= 110 && pipePosition > 0 && marioPosition < 60) {
+    gameRunning = false;
+    pipe.style.animation = 'none';
+    mario.src = 'img/game-over.png';
+    mario.style.width = '75px';
+    mario.style.marginLeft = '50px';
+    reset.style.display = 'flex';
+  }
+
+  requestAnimationFrame(gameLoop);
 };
 
-// Atualiza a pontuação
-const updateScore = () => {
-    score++;
-    scoreDisplay.innerText = `Pontuação: ${score}`;
-};
-
-// Atualiza a pontuação em intervalos regulares (100ms)
-const scoreInterval = setInterval(updateScore, 100);
+requestAnimationFrame(gameLoop);
 
 game_board.addEventListener('touchstart', jump);
 document.addEventListener('keydown', jump);
-
-// Começa o loop de animação
-requestAnimationFrame(loop);
