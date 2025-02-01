@@ -4,7 +4,7 @@ const game_board = document.querySelector('.game-board');
 const reset = document.querySelector('.reset');
 const scoreDisplay = document.querySelector('.score');
 let score = 0;
-let pipeSpeed = 5; // velocidade inicial dos canos
+let pipeSpeed = 5; // Velocidade constante dos canos
 let gameRunning = true;
 
 const jump = () => {
@@ -14,20 +14,6 @@ const jump = () => {
             mario.classList.remove('jump');
         }, 500); // Remove o pulo após 500ms
     }
-};
-
-// Função para acelerar a velocidade conforme a pontuação e o tempo
-const updateGameSpeed = () => {
-    if (score % 5 === 0 && score > 0) { // A cada 5 pontos
-        pipeSpeed += 0.5; // Aumenta a velocidade do cano
-    }
-
-    // Acelera os canos ao longo do tempo (a cada 10 segundos)
-    setTimeout(() => {
-        if (gameRunning) {
-            pipeSpeed += 0.5; // Aumenta a velocidade do cano
-        }
-    }, 10000); // Ajusta o tempo (10 segundos)
 };
 
 let lastFrameTime = 0;
@@ -42,9 +28,6 @@ const loop = (timestamp) => {
     const mario_position = +window.getComputedStyle(mario).bottom.replace('px', ''); // Pega a posição da Mario
     const pipe_position = pipe.offsetLeft; // Pega a posição do cano
 
-    // Acelera o cano conforme a pontuação
-    updateGameSpeed();
-
     // Colisão
     if (pipe_position <= 120 && pipe_position > 0 && mario_position < 80) {
         pipe.style.animation = 'none';
@@ -57,7 +40,7 @@ const loop = (timestamp) => {
         return;
     }
 
-    pipe.style.left = `${pipe_position - pipeSpeed}px`; // Atualiza a posição do cano com a nova velocidade
+    pipe.style.left = `${pipe_position - pipeSpeed}px`; // Atualiza a posição do cano com a velocidade constante
 
     if (pipe_position <= 0) {
         pipe.style.left = '100%'; // Reseta a posição do cano
