@@ -37,4 +37,3 @@ const updateScore = setInterval(() => {
 
 game_board.addEventListener('touchstart', jump);
 document.addEventListener('keydown', jump)
-
