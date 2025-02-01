@@ -8,7 +8,7 @@
 .game-board{
     margin: 0 auto;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     border-bottom: 15px solid rgb(0, 255, 0);
     background: linear-gradient(rgb(49, 212, 199), white);
     position: relative;
