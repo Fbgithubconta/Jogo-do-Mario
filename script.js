@@ -37,6 +37,7 @@ const loop = (timestamp) => {
         mario.style.marginLeft = '50px';
         reset.style.display = 'flex';
         gameRunning = false;
+        clearInterval(scoreInterval); // Para a pontuação quando o jogo acaba
         return;
     }
 
@@ -57,7 +58,7 @@ const updateScore = () => {
 };
 
 // Atualiza a pontuação em intervalos regulares (100ms)
-setInterval(updateScore, 100);
+const scoreInterval = setInterval(updateScore, 100);
 
 game_board.addEventListener('touchstart', jump);
 document.addEventListener('keydown', jump);
