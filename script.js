@@ -21,7 +21,7 @@ const loop = setInterval(() => {
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
-    if (pipePosition > 0 && pipePosition <= 110 && marioPosition <= 60) {
+    if (pipePosition > 0 && pipePosition <= 110 && marioPosition <= 70) {
         // Colisão detectada
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
