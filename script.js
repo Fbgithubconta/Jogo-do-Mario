@@ -2,10 +2,21 @@ const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const game_board = document.querySelector('.game-board');
 const reset = document.querySelector('.reset');
-
 const scoreDisplay = document.createElement('h2');
 scoreDisplay.classList.add('score');
 game_board.appendChild(scoreDisplay);
+const data = new Date
+let hora = data.getHours()
+if(hora<=12){
+    game_board.style.background= 'linear-gradient(#31d4c7, #ffffff)'
+}
+else if(hora>=12 && hora <=18){
+    game_board.style.background = 'linear-gradient(#ffb109, #ffffff)';
+}
+else{
+    game_board.style.background = 'linear-gradient(#6449a3, #390894)';
+}
+
 
 let score = 0;
 let gameRunning = true;
