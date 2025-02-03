@@ -75,10 +75,10 @@
         bottom: 190px;
     }
     50%{
-        bottom: 190px
+        bottom: 200px
     }
     60%{
-        bottom: 200px /*Impressão de pico*/
+        bottom: 220px /*Impressão de pico*/
     }
     100%{
         bottom: 0;
