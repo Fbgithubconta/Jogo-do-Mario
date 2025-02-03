@@ -21,7 +21,7 @@ const loop = setInterval(() => {
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
-    if (pipePosition <= 110 && pipePosition > 0 && marioPosition <= 70) {
+    if (pipePosition <= 110 && marioPosition <= 70) {
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
         mario.style.animation = 'none';
@@ -29,7 +29,7 @@ const loop = setInterval(() => {
         mario.src = 'img/game-over.png';
         mario.style.width = '75px';
         reset.style.display = 'flex';
-
+        mario.style.left = '50px'
         gameRunning = false;
         clearInterval(scoreCounter); // Parar o contador de pontos
     }
